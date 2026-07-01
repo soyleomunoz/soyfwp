@@ -275,8 +275,8 @@
     #productos { background: var(--gray-light); }
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
       margin-top: 52px;
     }
     .product-card {
@@ -286,12 +286,18 @@
       box-shadow: 0 4px 24px rgba(0,0,0,.07);
       transition: transform .3s, box-shadow .3s;
       cursor: pointer;
-      display: flex;          
-      flex-direction: column; 
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
     }
     .product-card:hover { transform: translateY(-8px); box-shadow: 0 18px 48px rgba(31,122,99,.18); }
+    .product-new {
+      border: 2px solid var(--orange);
+      box-shadow: 0 4px 24px rgba(255,122,0,.15);
+    }
+    .product-new:hover { box-shadow: 0 18px 48px rgba(255,122,0,.28); }
     .product-thumb {
-      height: 200px;
+      height: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -305,50 +311,69 @@
       inset: 0;
       background: inherit;
       opacity: .12;
+      pointer-events: none;
+    }
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--white);
+      color: var(--green-dark);
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      z-index: 1;
     }
     .p1 .product-thumb { background: linear-gradient(135deg,#1F7A63,#2FBF8F); }
     .p2 .product-thumb { background: linear-gradient(135deg,#7B5EA7,#C49DD0); }
     .p3 .product-thumb { background: linear-gradient(135deg,#FF7A00,#FFC857); }
     .p4 .product-thumb { background: linear-gradient(135deg,#1B4F72,#5DADE2); }
     .product-body {
-      padding: 24px;
+      padding: 20px 16px;
       display: flex;          /* ← AGREGAR */
       flex-direction: column; /* ← AGREGAR */
       flex: 1;                /* ← AGREGAR */
     }
     .product-tag {
-      font-size: .7rem;
+      font-size: .62rem;
       font-weight: 700;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       text-transform: uppercase;
       color: var(--green-mid);
       margin-bottom: 6px;
     }
     .product-name {
       font-family: var(--font-head);
-      font-size: 1.3rem;
+      font-size: 1.05rem;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .product-desc {
-      font-size: .9rem;
+      font-size: .78rem;
       color: #666;
-      line-height: 1.6;
-      margin-bottom: 18px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .product-benefits {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 20px;
+      gap: 4px;
+      margin-bottom: 16px;
       margin-top: auto;
     }
     .benefit-tag {
       background: var(--gray-light);
       color: var(--green-dark);
-      font-size: .72rem;
+      font-size: .62rem;
       font-weight: 600;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 20px;
     }
     .btn-product {
@@ -356,10 +381,10 @@
       text-align: center;
       background: var(--green-dark);
       color: var(--white);
-      padding: 12px;
+      padding: 10px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: .95rem;
+      font-size: .8rem;
       text-decoration: none;
       transition: background .2s, transform .2s;
     }
@@ -843,6 +868,10 @@
       .steps-wrap { grid-template-columns: 1fr 1fr; gap: 36px; }
       .steps-wrap::before { display: none; }
       .footer-top { grid-template-columns: 1fr 1fr; }
+      .products-grid { gap: 10px; }
+      .product-thumb { height: 120px; }
+      .product-thumb img.product-img { max-width: 84px; }
+      .product-body { padding: 14px 10px; }
     }
     @media (max-width: 680px) {
       #navbar { padding: 16px 20px; }
@@ -855,15 +884,88 @@
       .footer-top { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; text-align: center; }
       section { padding: 60px 20px; }
+      .products-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        margin-top: 36px;
+        padding-bottom: 12px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .product-card { flex: 0 0 78%; scroll-snap-align: center; }
+      .product-thumb { height: 180px; }
+      .product-thumb img.product-img { max-width: 150px; }
+      .product-body { padding: 22px 18px; }
+      .product-name { font-size: 1.2rem; }
+      .product-desc { font-size: .88rem; -webkit-line-clamp: 4; }
+      .product-tag { font-size: .7rem; }
+      .benefit-tag { font-size: .72rem; padding: 4px 10px; }
+      .btn-product { font-size: .92rem; padding: 12px; }
     }
 
     .product-thumb img.product-img {
       width: 100%;
-      max-width: 180px; /* ajusta según tu diseño */
+      max-width: 110px;
       height: auto;
       display: block;
       margin: 0 auto;
+      cursor: pointer;
+      transition: transform .25s ease;
     }
+    .product-thumb img.product-img:hover { transform: scale(1.05); }
+    .product-thumb img.product-img:focus-visible {
+      outline: 3px solid var(--green-mid);
+      outline-offset: 3px;
+    }
+
+    /* =========== MODAL IMAGEN PRODUCTO =========== */
+    .product-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15,40,32,.92);
+      padding: 40px 20px;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .product-modal.open { display: flex; opacity: 1; }
+    .product-modal-img {
+      max-width: min(480px, 90vw);
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 64px rgba(0,0,0,.4);
+      transform: scale(.94);
+      transition: transform .25s ease;
+    }
+    .product-modal.open .product-modal-img { transform: scale(1); }
+    .product-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,.14);
+      color: var(--white);
+      font-size: 1.8rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .product-modal-close:hover { background: rgba(255,255,255,.26); }
+    .product-modal-close:focus-visible { outline: 3px solid var(--green-mid); outline-offset: 2px; }
 
     /* =========== BADGE GESTIXPRO =========== */
     #gestixpro-badge {
@@ -959,9 +1061,27 @@
     </div>
     <div class="products-grid">
 
+      <article class="product-card p1 product-new reveal">
+        <div class="product-thumb">
+          <span class="product-badge">Nuevo</span>
+          <img src="img/24burn.png" alt="24B+" class="product-img" tabindex="0" role="button" aria-label="Ver imagen ampliada de 24B+">
+        </div>
+        <div class="product-body">
+          <div class="product-tag">Metabolismo</div>
+          <h3 class="product-name">24B+</h3>
+          <p class="product-desc">Té energizante que potencia tu metabolismo, inhibe el apetito y te mantiene activo durante todo el día.</p>
+          <div class="product-benefits">
+            <span class="benefit-tag">Energía sostenida</span>
+            <span class="benefit-tag">Apetito controlado</span>
+            <span class="benefit-tag">Metabolismo activo</span>
+          </div>
+          <a href="https://wa.me/56975233425?text=Hola,%20quiero%20información%20sobre%2024B%2B" target="_blank" class="btn-product">Pedir ahora →</a>
+        </div>
+      </article>
+
       <article class="product-card p1 reveal">
         <div class="product-thumb">
-          <img src="img/24burn.png" alt="24 Burn" class="product-img">
+          <img src="img/24burn_ant.png" alt="24 Burn" class="product-img" tabindex="0" role="button" aria-label="Ver imagen ampliada de 24 Burn">
         </div>
         <div class="product-body">
           <div class="product-tag">Metabolismo</div>
@@ -976,26 +1096,28 @@
         </div>
       </article>
 
-      <article class="product-card p2 reveal">
+      <article class="product-card p2 product-new reveal">
         <div class="product-thumb">
-          <img src="img/renova.png" alt="24 Burn" class="product-img">
+          <span class="product-badge">Nuevo</span>
+          <img src="img/renova.png" alt="RVA+" class="product-img" tabindex="0" role="button" aria-label="Ver imagen ampliada de RVA+">
         </div>
         <div class="product-body">
           <div class="product-tag">Suplemento de belleza</div>
-          <h3 class="product-name">Renova+</h3>
-          <p class="product-desc">Colágeno de alta calidad para apoyar la salud de tu piel, cabello, uñas y articulaciones desde adentro.</p>
+          <h3 class="product-name">RVA+</h3>
+          <p class="product-desc">Versión mejorada de Renova+: el mismo colágeno de alta calidad para tu piel, cabello, uñas y articulaciones, ahora en prácticos sobres individuales en vez del formato en pote anterior.</p>
           <div class="product-benefits">
+            <span class="benefit-tag">Formato en sobres</span>
             <span class="benefit-tag">Piel saludable</span>
             <span class="benefit-tag">Cabello fuerte</span>
             <span class="benefit-tag">Articulaciones</span>
           </div>
-          <a href="https://wa.me/56975233425?text=Hola,%20quiero%20información%20sobre%20Renova+" target="_blank" class="btn-product">Pedir ahora →</a>
+          <a href="https://wa.me/56975233425?text=Hola,%20quiero%20información%20sobre%20RVA+" target="_blank" class="btn-product">Pedir ahora →</a>
         </div>
       </article>
 
       <article class="product-card p3 reveal">
         <div class="product-thumb">
-          <img src="img/liv.png" alt="24 Burn" class="product-img">
+          <img src="img/liv.png" alt="Fibra" class="product-img" tabindex="0" role="button" aria-label="Ver imagen ampliada de Fibra">
         </div>
         <div class="product-body">
           <div class="product-tag">Suplemento digestivo</div>
@@ -1012,7 +1134,7 @@
 
       <article class="product-card p4 reveal">
         <div class="product-thumb">
-          <img src="img/eboost.png" alt="E-BOOST" class="product-img">
+          <img src="img/eboost.png" alt="E-BOOST" class="product-img" tabindex="0" role="button" aria-label="Ver imagen ampliada de E-BOOST">
         </div>
         <div class="product-body">
           <div class="product-tag">Energía saludable</div>
@@ -1035,6 +1157,12 @@
     </div>
   </div>
 </section>
+
+<!-- MODAL IMAGEN PRODUCTO -->
+<div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="product-modal-close" id="productModalClose" aria-label="Cerrar imagen">&times;</button>
+  <img src="" alt="" class="product-modal-img" id="productModalImg">
+</div>
 
 <!-- BENEFICIOS -->
 <section id="beneficios">
@@ -1489,6 +1617,37 @@
     });
   }, { threshold: 0.12 });
   reveals.forEach(r => revealObs.observe(r));
+
+  // ===== MODAL IMAGEN PRODUCTO =====
+  const productModal = document.getElementById('productModal');
+  const productModalImg = document.getElementById('productModalImg');
+  const productModalClose = document.getElementById('productModalClose');
+
+  function openProductModal(img) {
+    productModalImg.src = img.src;
+    productModalImg.alt = img.alt;
+    productModal.classList.add('open');
+    productModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    productModalClose.focus();
+  }
+  function closeProductModal() {
+    productModal.classList.remove('open');
+    productModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.product-thumb .product-img').forEach(img => {
+    img.addEventListener('click', () => openProductModal(img));
+    img.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProductModal(img); }
+    });
+  });
+  productModalClose.addEventListener('click', closeProductModal);
+  productModal.addEventListener('click', e => { if (e.target === productModal) closeProductModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && productModal.classList.contains('open')) closeProductModal();
+  });
 
   // ===== SLIDER =====
   const track = document.getElementById('sliderTrack');
