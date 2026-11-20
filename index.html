@@ -39,6 +39,10 @@
     }
 
     html { scroll-behavior: smooth; }
+    /* Móvil: sin desplazamiento horizontal de la página (red de seguridad) */
+    html, body { overflow-x: hidden; overscroll-behavior-x: none; }
+    html { touch-action: pan-y pinch-zoom; }
+    body { position: relative; width: 100%; }
 
     body {
       font-family: var(--font-body);
