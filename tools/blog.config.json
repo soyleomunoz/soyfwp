@@ -1,0 +1,36 @@
+{
+  "site": "https://soyfwp.cl",
+  "nombre": "soyfwp",
+  "fuentes_html": "<style id=\"local-fonts\">\n/* Tipografías alojadas en el sitio (Fontsource, licencia OFL) */\n@font-face{font-family:\"Bebas Neue\";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/bebas-neue-latin-400-normal.woff2) format(\"woff2\")}\n@font-face{font-family:\"DM Sans\";font-style:normal;font-weight:300;font-display:swap;src:url(assets/fonts/dm-sans-latin-300-normal.woff2) format(\"woff2\")}\n@font-face{font-family:\"DM Sans\";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/dm-sans-latin-400-normal.woff2) format(\"woff2\")}\n@font-face{font-family:\"DM Sans\";font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/dm-sans-latin-500-normal.woff2) format(\"woff2\")}\n@font-face{font-family:\"DM Sans\";font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/dm-sans-latin-600-normal.woff2) format(\"woff2\")}\n@font-face{font-family:\"DM Sans\";font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/dm-sans-latin-700-normal.woff2) format(\"woff2\")}\n@font-face{font-family:\"Syne\";font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/syne-latin-700-normal.woff2) format(\"woff2\")}\n@font-face{font-family:\"Syne\";font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/syne-latin-800-normal.woff2) format(\"woff2\")}\n</style>",
+  "tema": {
+    "fondo2": "#ffffff",
+    "texto": "#222",
+    "suave": "#666",
+    "borde": "#ddd",
+    "fondo": "#1F7A63",
+    "acento": "#FF7A00",
+    "fuente_titulos": "'Syne',sans-serif",
+    "fuente_texto": "'DM Sans',sans-serif"
+  },
+  "og_home": {
+    "imagen": "img/liv.png",
+    "estilo": "lateral",
+    "kicker": "Nutrición y bienestar",
+    "titulo": "Bienestar e ingresos extra",
+    "fondo": "linear-gradient(135deg,#145848,#1F7A63)"
+  },
+  "paginas_extra": [],
+  "llms": {
+    "resumen": "soyfwp reúne productos de nutrición y bienestar de la marca FWP y una oportunidad de negocio para generar ingresos extra.",
+    "datos": [
+      "Contacto: WhatsApp +56 9 7523 3425"
+    ],
+    "paginas": [
+      [
+        "Inicio",
+        "",
+        "productos, beneficios, oportunidad de negocio, testimonios y contacto"
+      ]
+    ]
+  }
+}
