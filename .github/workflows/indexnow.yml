@@ -1,0 +1,39 @@
+# Avisa a Bing y demás buscadores IndexNow cuando cambian páginas del sitio
+# (Bing alimenta también a ChatGPT, Copilot, DuckDuckGo y Yahoo).
+# Corre después de cada push a main; espera a que GitHub Pages publique y envía
+# solo las URLs nuevas o modificadas. Desde la pestaña Actions se puede lanzar a
+# mano con "todas" para reenviar el sitemap completo.
+name: Avisar a buscadores (IndexNow)
+
+on:
+  push:
+    branches: [main]
+    paths: ["**.html", "sitemap.xml", "*.txt"]
+  workflow_dispatch:
+    inputs:
+      todas:
+        description: "Enviar todas las URLs del sitemap"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  avisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Enviar URLs a IndexNow
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.todas }}" = "true" ]; then
+            python3 tools/indexnow.py --todas
+          else
+            python3 tools/indexnow.py --desde "${{ github.event.before || 'HEAD~1' }}"
+          fi
